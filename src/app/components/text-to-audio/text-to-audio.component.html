@@ -1,0 +1,50 @@
+<section class="w-full h-dvh p-5 vk-bg-body">
+  <div class="bg-white p-3 rounded">
+    <header class="pb-3">
+      <h1 class="vk-h5">VK64</h1>
+    </header>
+    <div class="">
+      <h1 class="vk-h4 pb-3">Text to Mp3</h1>
+      <div class="pb-3">
+        <textarea
+          [(ngModel)]="text"
+          placeholder="Enter text to convert to MP3"
+          rows="5"
+          class="vk-form-input"
+        ></textarea>
+      </div>
+
+      <div class="flex gap-3 items-center">
+        <button
+          (click)="convertTextToAudio()"
+          class="vk-btn-green-g"
+          [disabled]="!text.length"
+        >
+          <span class="flex items-center">
+            @if(loading){
+            <span class="me-2">
+              <img
+                src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
+                alt="Loader"
+                class="size-5"
+              />
+            </span>
+            } Convert to mp3
+          </span>
+        </button>
+
+        <button
+          *ngIf="audioUrl"
+          (click)="downloadAudio()"
+          class="vk-btn-blue-g"
+        >
+          Download MP3
+        </button>
+      </div>
+
+      <div *ngIf="audioUrl" class="py-3">
+        <audio [src]="audioUrl" controls></audio>
+      </div>
+    </div>
+  </div>
+</section>
