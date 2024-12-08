@@ -15,6 +15,8 @@ export class TextToAudioComponent {
   text: string = '';
   audioUrl: string | null = null;
   loading: boolean = false;
+  lang: string = 'en-us';
+  voice: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -27,9 +29,9 @@ export class TextToAudioComponent {
     }
 
     const apiKey = '5590727e0cea4fada5bebc075deedb71'; // Replace with your API key
-    const url = `https://api.voicerss.org/?key=${apiKey}&hl=en-us&v=Mike&src=${encodeURIComponent(
-      this.text
-    )}&f=48khz_16bit_stereo`;
+    const url = `https://api.voicerss.org/?key=${apiKey}&hl=${this.lang}&v=${
+      this.voice
+    }&src=${encodeURIComponent(this.text)}&f=48khz_16bit_stereo`;
 
     this.http.get(url, { responseType: 'blob' }).subscribe((blob: Blob) => {
       this.audioUrl = URL.createObjectURL(blob);

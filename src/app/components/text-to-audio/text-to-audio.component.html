@@ -5,7 +5,7 @@
     </header>
     <div class="">
       <h1 class="vk-h4 pb-3">Text to Mp3</h1>
-      <div class="pb-3">
+      <div>
         <textarea
           [(ngModel)]="text"
           placeholder="Enter text to convert to MP3"
@@ -14,11 +14,48 @@
         ></textarea>
       </div>
 
-      <div class="flex gap-3 items-center">
+      <!-- <div>
+        <label for="lang" class="vk-form-label">Select Language</label>
+        <select name="lang" id="lang" class="vk-form-input" [(ngModel)]="lang">
+          <option value="en-us">English</option>
+          <option value="ta-in">Tamil</option>
+        </select>
+      </div> -->
+
+      @if(lang === 'en-us'){
+      <div class="pb-3">
+        <label for="voice" class="vk-form-label">Select Voice</label>
+        <select
+          name="voice"
+          id="voice"
+          class="vk-form-input"
+          [(ngModel)]="voice"
+        >
+          <option value="Mike">Mike (Male)</option>
+          <option value="John">John (Male)</option>
+          <option value="Mary">Mary (Female)</option>
+          <option value="Amy">Amy (Female)</option>
+        </select>
+      </div>
+      } @if(lang === 'ta-in'){
+      <div>
+        <label for="voice" class="vk-form-label">Select Voice</label>
+        <select
+          name="voice"
+          id="voice"
+          class="vk-form-input"
+          [(ngModel)]="voice"
+        >
+          <option value="Sai">Sai (Male)</option>
+        </select>
+      </div>
+      }
+
+      <div class="flex gap-3 items-center pt-3">
         <button
           (click)="convertTextToAudio()"
           class="vk-btn-green-g"
-          [disabled]="!text.length"
+          [disabled]="!text.length || !lang.length || !voice.length"
         >
           <span class="flex items-center">
             @if(loading){
