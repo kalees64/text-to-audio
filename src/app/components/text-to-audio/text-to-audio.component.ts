@@ -17,6 +17,7 @@ export class TextToAudioComponent {
   loading: boolean = false;
   lang: string = 'en-us';
   voice: string = '';
+  audioFileName!: string;
 
   constructor(private http: HttpClient) {}
 
@@ -49,16 +50,16 @@ export class TextToAudioComponent {
           this.downloadAudio();
         }
       });
-    });
 
-    this.stopLoading();
+      this.stopLoading();
+    });
   }
 
   downloadAudio(): void {
     if (this.audioUrl) {
       const link = document.createElement('a');
       link.href = this.audioUrl;
-      link.download = 'text-to-audio.mp3';
+      link.download = `${this.audioFileName}.mp3`;
       link.click();
     }
   }
